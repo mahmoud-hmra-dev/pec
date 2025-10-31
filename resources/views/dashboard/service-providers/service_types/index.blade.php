@@ -19,13 +19,16 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Code</th>
-                    <th>Is one</th>
+                    <th title="Optional external identifier used in integrations">Code</th>
+                    <th title="Marks service types that can only be assigned once per service provider">Is one</th>
                     <th>Actions</th>
                 </tr>
             </thead>
         </table>
     </div>
+    <p class="text-muted small mt-2">
+        <strong>Tip:</strong> Use the <em>Code</em> column to store an integration reference if needed. Enable <em>Is one</em> when the service type should be unique per provider.
+    </p>
 </div>
 
 @component('dashboard.service-providers.service_types.form')

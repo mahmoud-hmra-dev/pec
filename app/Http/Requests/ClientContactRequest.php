@@ -29,7 +29,7 @@ class ClientContactRequest extends FormRequest
         return [
             'name'     => 'required|string|max:64',
 			'email'         => 'required|email|max:64|unique:client_contacts,email,'. $this->id,
-            'phone'          => 'required|string',
+            'phone'          => 'nullable|string',
             'role'          => 'required|string|'.Rule::in(ClientContactRoleEnum::PSPManager,ClientContactRoleEnum::ProgramCoordinator,ClientContactRoleEnum::GeneralContact,ClientContactRoleEnum::SafetyCoordinator,ClientContactRoleEnum::FinanceDepartment),
 
         ];

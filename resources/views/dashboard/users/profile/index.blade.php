@@ -50,17 +50,17 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label class="required-label">Personal Email</label>
+                                        <label>Personal Email</label>
                                         <input type="email" name="personal_email" class="form-control" value="{{old('personal_email',auth()->user()->personal_email)}}">
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label class="required-label">Phone</label>
+                                        <label>Phone</label>
                                         <input type="text" name="phone" class="form-control" value="{{old('personal_email',auth()->user()->phone)}}">
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label class="required-label">Country</label>
+                                        <label>Country</label>
                                         <select class="form-control" id="country_id" name="country_id" >
                                             @foreach($countries as $country)
                                                 <option value="{{$country->id}}"
@@ -71,23 +71,30 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="city" class="label-required">City</label>
+                                            <label for="city">City</label>
                                             <input name="city" type="text" class="form-control" value="{{old('personal_email',auth()->user()->city)}}">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="address" class="label-required">Address</label>
+                                            <label for="address">Address</label>
                                             <input name="address" type="text" class="form-control" value="{{old('personal_email',auth()->user()->address)}}">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group m-2 float-right">
-                                    <button type="submit" class="edit btn btn-xs btn-primary mr-2" >
+                                <div class="form-group m-2 text-right">
+                                    <button type="submit" class="edit btn btn-xs btn-primary" >
                                         Submit
                                     </button>
                                 </div>
+                            </form>
+                            <form method="post" class="mt-3 text-right" action="{{ route('profile.destroy', auth()->id()) }}" onsubmit="return confirm('Are you sure you want to permanently delete your profile?');">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-xs btn-outline-danger">
+                                    Delete profile
+                                </button>
                             </form>
                         </div>
                     </div>

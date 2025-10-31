@@ -126,17 +126,6 @@
                         </li>
                     @endcan
 
-                @can(\App\Enums\PermissionEnum::MANAGE_COUNTRIES)
-                <li class="nav-item line">
-                    <a href="{{route('countries.index')}}" class="nav-link {{ route('countries.index') == request()->fullUrl() ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-flag"></i>
-                        <p>
-                            Countries
-                        </p>
-                    </a>
-                </li>
-                @endcan
-
                 @can(\App\Enums\PermissionEnum::VIEW_HOSPITALS)
                 <li class="nav-item line">
                     <a href="{{route('hospitals.index')}}" class="nav-link {{ route('hospitals.index') == request()->fullUrl() ? 'active' : '' }}">

@@ -15,3 +15,10 @@
 @import "~admin-lte/plugins/datatables-searchbuilder/css/searchBuilder.bootstrap4.min.css";
 @import "~admin-lte/plugins/chart.js/Chart.min.css";
 @import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
+
+.required-label::after,
+.label-required::after {
+    content: ' *';
+    color: #e3342f;
+    font-weight: 600;
+}

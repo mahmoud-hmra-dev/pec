@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label class="required-label">Personal Email</label>
+                            <label>Personal Email</label>
                             <input type="email" name="personal_email" class="form-control">
                         </div>
 
@@ -45,12 +45,12 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label class="required-label">Phone</label>
+                            <label>Phone</label>
                             <input type="text" name="phone" class="form-control">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label class="required-label">Country</label>
+                            <label>Country</label>
                             <select class="form-control" id="country_id" name="country_id" >
                                 @foreach($countries as $country)
                                     <option value="{{$country->id}}"
@@ -61,14 +61,14 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="city" class="label-required">City</label>
+                                <label for="city">City</label>
                                 <input name="city" type="text" class="form-control" value="">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address" class="label-required">Address</label>
+                                <label for="address">Address</label>
                                 <input name="address" type="text" class="form-control" value="">
                             </div>
                         </div>

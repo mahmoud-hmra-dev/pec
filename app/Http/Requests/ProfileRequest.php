@@ -26,9 +26,9 @@ class ProfileRequest extends FormRequest
         return [
             'id'             => 'nullable|exists:users,id',
             'first_name'     => 'required|string',
-			'last_name'      => 'required|string',
-			'phone'          => 'required|string',
-			'email'          => 'required|email',
+            'last_name'      => 'required|string',
+            'phone'          => 'nullable|string',
+            'email'          => 'required|email',
             'personal_email' => 'nullable|email',
             'city'           => 'nullable|string',
             'country_id'     => 'nullable|exists:countries,id',
