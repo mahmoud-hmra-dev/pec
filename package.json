@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.4",
+        "sass-loader": "^12.1.0"
+    },
+    "dependencies": {
+        "admin-lte": "^3.1.0",
+        "animate.css": "^4.1.1",
+        "bootstrap": "^4.5.0",
+        "compass-mixins": "^0.12.10",
+        "datatables.net": "^1.12.1",
+        "datatables.net-bs4": "^1.12.1",
+        "datatables.net-buttons": "^2.2.3",
+        "datatables.net-buttons-bs4": "^2.2.3",
+        "datatables.net-fixedheader": "^3.2.4",
+        "ion-rangeslider": "^2.3.1",
+        "jquery": "^3.6.0",
+        "jquery-nice-select": "^1.1.0",
+        "popper.js": "^1.16.1",
+        "sweetalert2": "^11.4.33",
+        "toastr": "^2.1.4",
+        "wowjs": "^1.1.3"
+    }
+}
