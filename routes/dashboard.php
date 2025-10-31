@@ -47,6 +47,10 @@ Route::resource('specialties',Controllers\SpecialtyController::class);
 Route::resource('programs',Controllers\ProgramController::class);
 Route::get('programs/drugs/{client_id?}',[Controllers\ProgramController::class,'drugs'])->name('programs.drugs');
 Route::get('programs/program_drugs/{program_id?}',[Controllers\ProgramController::class,'program_drugs'])->name('programs.program_drugs');
+Route::resource('programs.contacts',Controllers\ProgramContactController::class);
+Route::resource('programs.form-fields',Controllers\ProgramFormFieldController::class)->parameters([
+    'form-fields' => 'form_field',
+]);
 
 
 Route::resource('programs.sub_programs',Controllers\SubProgramController::class);
