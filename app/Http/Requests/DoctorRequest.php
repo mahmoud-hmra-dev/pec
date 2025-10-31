@@ -25,7 +25,7 @@ class DoctorRequest extends FormRequest
     {
         return [
 
-			'phone'          => 'required|string',
+            'phone'          => 'nullable|string',
             'name'          => 'required|string|unique:doctors,name,'. $this->id,
 
         ];

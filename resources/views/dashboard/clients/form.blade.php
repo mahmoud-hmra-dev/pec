@@ -35,12 +35,12 @@
                         <input name="password" type="hidden" class="form-control" value="password">
 
                         <div class="form-group col-md-6">
-                            <label class="required-label">Phone</label>
+                            <label>Phone</label>
                             <input type="text" name="phone" class="form-control">
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label class="required-label">Country</label>
+                            <label>Country</label>
                             <select class="form-control select2 w-100"  id="country_id" name="country_id" >
                                 @foreach($countries as $country)
                                     <option value="{{$country->id}}"
@@ -51,7 +51,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="city" class="label-required">City</label>
+                                <label for="city">City</label>
                                 <input name="city" type="text" class="form-control" value="">
                             </div>
                         </div>

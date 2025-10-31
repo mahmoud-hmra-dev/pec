@@ -34,6 +34,28 @@
 @push('scripts')
 <script>
     $(function () {
+        const $serviceTypeSelect = $('#service_type_id');
+        const $customTypeGroup = $('#service_type_name_group');
+
+        const toggleCustomType = () => {
+            const selected = $serviceTypeSelect.find('option:selected');
+            const isCustom = selected.data('custom');
+
+            if (isCustom) {
+                $customTypeGroup.show();
+                $customTypeGroup.find('input').attr('required', true);
+            } else {
+                $customTypeGroup.hide();
+                $customTypeGroup.find('input').removeAttr('required').val('');
+            }
+        };
+
+        $serviceTypeSelect.on('change', toggleCustomType);
+        toggleCustomType();
+
+        window.__serviceProviderTypeSelect = $serviceTypeSelect;
+        window.toggleCustomServiceType = toggleCustomType;
+
         var table = $('#service_provider_types-table').DataTable({
             processing: true,
             serverSide: false,
@@ -56,6 +78,15 @@
         $('.add-form').on('submit', function (event) {
             SaveItem(event, this, $(this).attr('action'), table);
         });
+
+        window.ensureServiceTypeOption = function (data) {
+            if (data.service_type && data.service_type.id) {
+                if (!$serviceTypeSelect.find('option[value="' + data.service_type.id + '"]').length) {
+                    const newOption = new Option(data.service_type.name, data.service_type.id, true, true);
+                    $serviceTypeSelect.append(newOption).trigger('change');
+                }
+            }
+        };
 
         table.on('click', '.delete', function () {
             $tr = $(this).closest('tr');
@@ -82,6 +113,11 @@
         let $form = $('.add-form');
         clearForm($form)
         $form[0].reset();
+        const $serviceTypeSelect = window.__serviceProviderTypeSelect;
+        $serviceTypeSelect.val($serviceTypeSelect.find('option:first').val()).trigger('change');
+        if (typeof window.toggleCustomServiceType === 'function') {
+            window.toggleCustomServiceType();
+        }
         $form.attr('action', `dashboard/service-providers/`+ serviceProviderId+'/service_provider_types');
         $('.add-form input[name="_method"]').remove();
         $('.add-form input[name="service_provider_id"]').remove();
@@ -109,7 +145,12 @@
         clearErrors($data);
 
         $form.append('<input type="hidden" name="service_provider_id" value="'+data.service_provider_id+'">');
+        const $serviceTypeSelect = window.__serviceProviderTypeSelect;
+        ensureServiceTypeOption(data);
         _fill($data, data);
+        if (typeof window.toggleCustomServiceType === 'function') {
+            window.toggleCustomServiceType();
+        }
 
         $modal.modal('show');
         $modal.removeClass('out');

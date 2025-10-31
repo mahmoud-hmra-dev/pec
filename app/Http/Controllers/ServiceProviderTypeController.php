@@ -13,6 +13,7 @@ use App\Models\CountryServiceProvider;
 use App\Models\Program;
 use App\Models\ServiceProvider;
 use App\Models\ServiceProviderType;
+use App\Models\ServiceType;
 use App\Models\SubProgram;
 use App\Traits\FileHandler;
 use Exception;
@@ -22,6 +23,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -52,6 +54,7 @@ class ServiceProviderTypeController extends Controller{
                     $actions = '';
                     if (auth()->user()->can(PermissionEnum::MANAGE_ServiceProvider)) {
                         $actions .= '<a class="edit btn btn-xs btn-primary mr-1" style="color:#fff" ><i class="mdi mdi-tooltip-edit"></i> Edit</a>';
+                        $actions .= '<a class="delete btn btn-xs btn-dark" style="color:#fff"><i class="mdi mdi-delete"></i> Delete</a>';
                     }
                     return $actions;
                 })
@@ -80,9 +83,28 @@ class ServiceProviderTypeController extends Controller{
     {
         $model = ServiceProvider::findOrFail($service_provider_id);
 
+        $serviceTypeId = $request->service_type_id;
+
+        if (!$serviceTypeId && $request->filled('service_type_name')) {
+            $serviceType = ServiceType::firstOrCreate(
+                ['name' => $request->service_type_name],
+                [
+                    'code' => Str::upper(Str::slug($request->service_type_name, '_')),
+                    'is_one' => false,
+                ]
+            );
+
+            $serviceTypeId = $serviceType->id;
+
+            Role::firstOrCreate([
+                'name' => $serviceType->name,
+                'guard_name' => 'web',
+            ]);
+        }
+
         $service_provider_type = $model->service_provider_types()->create([
-            'service_type_id' => $request->service_type_id,
-        ]);
+            'service_type_id' => $serviceTypeId,
+        ])->load('service_type');
 
         $user = User::findOrFail($model->user_id);
 
@@ -93,7 +115,11 @@ class ServiceProviderTypeController extends Controller{
             $user->syncRoles([]);
         }
 
-        return response()->json(['success' => true,'message'=>"Added Successfully"],200);
+        return response()->json([
+            'success' => true,
+            'message'=>"Added Successfully",
+            'service_type' => $service_provider_type->service_type,
+        ],200);
     }
 
     /**
@@ -106,9 +132,31 @@ class ServiceProviderTypeController extends Controller{
     public function update(ServiceProviderTypeRequest $request, $service_provider_id, $id)
     {
         $model = ServiceProviderType::findOrFail($id);
+
+        $serviceTypeId = $request->service_type_id;
+
+        if (!$serviceTypeId && $request->filled('service_type_name')) {
+            $serviceType = ServiceType::firstOrCreate(
+                ['name' => $request->service_type_name],
+                [
+                    'code' => Str::upper(Str::slug($request->service_type_name, '_')),
+                    'is_one' => false,
+                ]
+            );
+
+            $serviceTypeId = $serviceType->id;
+
+            Role::firstOrCreate([
+                'name' => $serviceType->name,
+                'guard_name' => 'web',
+            ]);
+        }
+
         $model->update([
-            'service_type_id' => $request->service_type_id,
+            'service_type_id' => $serviceTypeId,
         ]);
+
+        $model->load('service_type');
 
 
         $ServiceProvider = ServiceProvider::findOrFail($service_provider_id);
@@ -124,7 +172,11 @@ class ServiceProviderTypeController extends Controller{
 
 
 
-        return response()->json(['success' => true,'message'=>"Updated Successfully"],200);
+        return response()->json([
+            'success' => true,
+            'message'=>"Updated Successfully",
+            'service_type' => $model->service_type,
+        ],200);
     }
 
     /**

@@ -51,8 +51,8 @@ class ServiceTypeController extends Controller{
                 ->addColumn('action', function ($item) {
                     $actions = '';
                     if (auth()->user()->can(PermissionEnum::MANAGE_ServiceProvider)) {
-                        $actions .= '
-                            <a class="edit btn btn-xs btn-primary mr-1" style="color:#fff" ><i class="mdi mdi-tooltip-edit"></i> Edit</a>';
+                        $actions .= '<a class="edit btn btn-xs btn-primary mr-1" style="color:#fff" ><i class="mdi mdi-tooltip-edit"></i> Edit</a>';
+                        $actions .= '<a class="delete btn btn-xs btn-dark" style="color:#fff"><i class="mdi mdi-delete"></i> Delete</a>';
                     }
                     return $actions;
                 })
