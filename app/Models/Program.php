@@ -32,4 +32,14 @@ class Program extends Model
     public function distributors(){
         return $this->hasMany(Distributor::class);
     }
+
+    public function contacts()
+    {
+        return $this->hasMany(ProgramContact::class);
+    }
+
+    public function formFields()
+    {
+        return $this->hasMany(ProgramFormField::class)->orderBy('display_order');
+    }
 }

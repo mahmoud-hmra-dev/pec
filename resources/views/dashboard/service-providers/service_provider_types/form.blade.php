@@ -18,7 +18,12 @@
                                 @foreach($service_types as $service_type)
                                     <option {{$service_type->id == old('service_type_id') ? 'selected' : ''}} value="{{$service_type->id}}">{{$service_type->name}}</option>
                                 @endforeach
+                                <option value="" data-custom="true">Other</option>
                             </select>
+                        </div>
+                        <div class="form-group col-md-6" id="service_type_name_group" style="display:none;">
+                            <label class="required-label">Custom title</label>
+                            <input type="text" name="service_type_name" id="service_type_name" class="form-control" value="{{ old('service_type_name') }}">
                         </div>
                     </div>
                     <div class="form-group m-2 float-right">

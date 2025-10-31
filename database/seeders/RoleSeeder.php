@@ -102,6 +102,7 @@ class RoleSeeder extends Seeder
             PermissionEnum::MANAGE_FOC,
             PermissionEnum::VIEW_FOC,
             PermissionEnum::VIEW_FOC_Visits_ShowTimeLine,
+            PermissionEnum::MANAGE_NURSES,
         ];
 
         foreach (Role::all() as $role) {

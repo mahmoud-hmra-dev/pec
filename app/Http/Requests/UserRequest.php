@@ -25,11 +25,11 @@ class UserRequest extends FormRequest
     {
         return [
             'first_name'     => 'required|string',
-			'last_name'      => 'required|string',
-			'phone'          => 'required|string',
-			'email'          => 'required|email|unique:users,email,'. $this->id,
+            'last_name'      => 'required|string',
+            'phone'          => 'nullable|string',
+            'email'          => 'required|email|unique:users,email,'. $this->id,
             'password'       => 'nullable|confirmed|string',
-            'personal_email' => 'required|email|unique:users,personal_email,'. $this->id,
+            'personal_email' => 'nullable|email|unique:users,personal_email,'. $this->id,
             'city'           => 'nullable|string',
             'country_id'     => 'nullable|exists:countries,id',
             'address'        => 'nullable|string',

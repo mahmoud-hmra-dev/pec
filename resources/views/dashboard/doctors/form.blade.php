@@ -18,8 +18,8 @@
                             <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <label class="required-label">Phone</label>
-                            <input type="text" name="phone" class="form-control" required>
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control">
                         </div>
                     </div>
 

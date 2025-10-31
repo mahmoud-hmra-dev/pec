@@ -97,6 +97,9 @@ function SaveItem(e, $this, url, table) {
             }
             $('.modal').modal('hide');
             clearForm($($this));
+            if (typeof ensureServiceTypeOption === 'function' && xhr && xhr.service_type) {
+                ensureServiceTypeOption(xhr);
+            }
             if (xhr && xhr.redirect) {
                 window.location.replace(xhr.redirect);
             }

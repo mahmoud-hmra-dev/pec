@@ -14,6 +14,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -70,5 +71,22 @@ class ProfileController extends Controller{
         ])->save();
 
         return redirect()->route('profile.index')->with('success', 'Password changed successfully');
+    }
+    public function destroy(Request $request, $id)
+    {
+        $user = $request->user();
+
+        if ((int) $user->id !== (int) $id) {
+            abort(403);
+        }
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('status', 'Your profile has been removed.');
     }
 }

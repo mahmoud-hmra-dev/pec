@@ -106,6 +106,10 @@ class ProgramController extends Controller
                     if (auth()->user()->can(PermissionEnum::MANAGE_PROGRAMS)) {
                         $actions .= '<a class="edit btn btn-xs btn-primary mr-1" style="color:#fff" ><i class="mdi mdi-tooltip-edit"></i> Edit</a>';
                     }
+                    if (auth()->user()->can(PermissionEnum::MANAGE_PROGRAMS)) {
+                        $actions .= '<a class="btn btn-xs btn-info mr-1" style="color:#fff" href="'.route('programs.contacts.index', $item->id).'"><i class="mdi mdi-account-group"></i> Contacts</a>';
+                        $actions .= '<a class="btn btn-xs btn-secondary mr-1" style="color:#fff" href="'.route('programs.form-fields.index', $item->id).'"><i class="mdi mdi-text-box"></i> Form Fields</a>';
+                    }
                     if (auth()->user()->can(PermissionEnum::VIEW_SUBPROGRAMS)) {
                     $actions .= '<a class="btn btn-xs btn-success mr-1" style="color:#fff" href="'.route('programs.sub_programs.index', $item->id).'"><i class="mdi mdi-tooltip-edit"></i> Sub programs</a>';
                     }
