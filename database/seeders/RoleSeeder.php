@@ -79,6 +79,7 @@ class RoleSeeder extends Seeder
 
             ["name"=>PermissionEnum::VIEW_SafetyReport,'guard_name'=>"web"],
             ["name"=>PermissionEnum::MANAGE_SafetyReport,'guard_name'=>"web"],
+            ["name"=>PermissionEnum::MANAGE_NURSES,'guard_name'=>"web"]
 
         ];
 
